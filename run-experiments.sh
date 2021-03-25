@@ -12,8 +12,8 @@ cd ..
 # Yahoo
 mkdir -p yahoo/
 cd yahoo
-cp ../../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-test.txt test.txt
-cp ../../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-train.txt train.txt
+cp ../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-test.txt test.txt
+cp ../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-train.txt train.txt
 
 # Run real world experiments in Saito paper
 cd ../../src
