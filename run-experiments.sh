@@ -1,13 +1,13 @@
 # Set up datasets
 
 # Coat
-mkdir -p data/coat/raw
-cd data/coat/raw
+mkdir -p data/coat
+cd data/coat
 wget https://www.cs.cornell.edu/~schnabts/mnar/coat.zip
 unzip coat.zip
 mv coat/test.ascii coat/train.ascii .
 rm -rf coat.zip coat/
-cd ../..
+cd ..
 
 # Yahoo
 mkdir -p yahoo/
