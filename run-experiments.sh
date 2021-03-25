@@ -10,8 +10,8 @@ rm -rf coat.zip coat/
 cd ../..
 
 # Yahoo
-mkdir -p yahoo/raw
-cd yahoo/raw
+mkdir -p yahoo/
+cd yahoo
 cp ../../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-test.txt test.txt
 cp ../../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-train.txt train.txt
 
