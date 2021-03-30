@@ -11,11 +11,11 @@ cd ..
 
 # Yahoo
 mkdir -p yahoo/
-cd yahoo
-cp ../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-test.txt test.txt
-cp ../../../drive/MyDrive/dataset/ydata-ymusic-rating-study-v1_0-train.txt train.txt
+cd yahoo/
+cp /kaggle/input/yahoo-music/ydata-ymusic-rating-study-v1_0-test.txt test.txt
+cp /kaggle/input/yahoo-music/ydata-ymusic-rating-study-v1_0-train.txt train.txt
 
 # Run real world experiments in Saito paper
-cd ../../src
+cd ../../../src
 python main.py --num_sims 5 --data coat
 python main.py --num_sims 20 --data yahoo
