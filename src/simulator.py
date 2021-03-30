@@ -9,7 +9,6 @@ from lightfm.data import Dataset
 from evaluator import Evaluator
 from preprocessor import preprocess_yahoo_coat, preprocess_movielens
 
-
 def lightfm_trainer(
     train: np.ndarray, loss: str, n_components: int, lam: float
 ) -> None:
@@ -23,21 +22,20 @@ def lightfm_trainer(
     # instantiating the model in the strategy scope creates the model on the TPU
     with tpu_strategy.scope():
         # train model normally
-        model.fit(training_dataset, epochs=EPOCHS, steps_per_epoch=…)
-            model = LightFM(
-                loss=loss,
-                user_alpha=lam,
-                item_alpha=lam,
-                no_components=n_components,
-                learning_rate=0.001,
-                random_state=12345,
-            )
-            dataset = Dataset()
-            dataset.fit(train[:, 0], train[:, 1])
-            (interactions, weights) = dataset.build_interactions(
-                ((x[0], x[1], 1) for x in train[train[:, 2] == 1])
-            )
-            model.fit(interactions, epochs=100)
+        model = LightFM(
+            loss=loss,
+            user_alpha=lam,
+            item_alpha=lam,
+            no_components=n_components,
+            learning_rate=0.001,
+            random_state=12345,
+        )
+        dataset = Dataset()
+        dataset.fit(train[:, 0], train[:, 1])
+        (interactions, weights) = dataset.build_interactions(
+            ((x[0], x[1], 1) for x in train[train[:, 2] == 1])
+        )
+        model.fit(interactions, epochs=100)
     return model
 
 
