@@ -3,7 +3,7 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from lightfm import LightFM
 from lightfm.data import Dataset
 from evaluator import Evaluator
