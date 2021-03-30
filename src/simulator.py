@@ -3,6 +3,7 @@ from typing import List
 
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 from lightfm import LightFM
 from lightfm.data import Dataset
 from evaluator import Evaluator
@@ -13,21 +14,30 @@ def lightfm_trainer(
     train: np.ndarray, loss: str, n_components: int, lam: float
 ) -> None:
     """Train lightfm models."""
-    model = LightFM(
-        loss=loss,
-        user_alpha=lam,
-        item_alpha=lam,
-        no_components=n_components,
-        learning_rate=0.001,
-        random_state=12345,
-    )
-    dataset = Dataset()
-    dataset.fit(train[:, 0], train[:, 1])
-    (interactions, weights) = dataset.build_interactions(
-        ((x[0], x[1], 1) for x in train[train[:, 2] == 1])
-    )
-    model.fit(interactions, epochs=100)
+    # detect and init the TPU
+    tpu = tf.distribute.cluster_resolver.TPUClusterResolver.connect()
 
+    # instantiate a distribution strategy
+    tpu_strategy = tf.distribute.experimental.TPUStrategy(tpu)
+
+    # instantiating the model in the strategy scope creates the model on the TPU
+    with tpu_strategy.scope():
+        # train model normally
+        model.fit(training_dataset, epochs=EPOCHS, steps_per_epoch=…)
+            model = LightFM(
+                loss=loss,
+                user_alpha=lam,
+                item_alpha=lam,
+                no_components=n_components,
+                learning_rate=0.001,
+                random_state=12345,
+            )
+            dataset = Dataset()
+            dataset.fit(train[:, 0], train[:, 1])
+            (interactions, weights) = dataset.build_interactions(
+                ((x[0], x[1], 1) for x in train[train[:, 2] == 1])
+            )
+            model.fit(interactions, epochs=100)
     return model
 
 
